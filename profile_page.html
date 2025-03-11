@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile</title>
+    <link rel="stylesheet" href="profile.css">
+</head>
+<body>
+
+    <!-- Header Section -->
+    <header>
+        <div class="logo">
+            <a href="#">Boxiee</a>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="page.html">Upload</a></li>
+                <li><a href="#">Profile</a></li>
+                <li><a href="#">Login</a></li>
+            </ul>
+        </nav>
+    </header>
+    <br><br><br>
+
+    <!-- Profile Section -->
+    <main class="profile-container">
+        <div class="profile-banner">
+            <img src="profile-banner.jpg" alt="Profile Banner" />
+        </div>
+
+        <div class="profile-details">
+            <div class="profile-picture">
+                <img src="profile-picture.jpg" alt="User Picture">
+            </div>
+            <div class="profile-info">
+                <h1 id="username">John Doe</h1>
+                <p id="subscribers">Subscribers: <span id="subscriberCount">1,234</span></p>
+                <p id="videoCount">Videos: 567</p>
+                <p id="description">This is the user's description. Add more details here.</p>
+                <button id="followButton">Follow</button>
+            </div>
+        </div>
+
+        <!-- Tabs for Profile Content -->
+        <div class="profile-tabs">
+            <button class="tab-button active" data-tab="overview">Overview</button>
+            <button class="tab-button" data-tab="videos">Videos</button>
+            <button class="tab-button" data-tab="about">About</button>
+        </div>
+
+        <!-- Profile Content Sections -->
+        <div class="profile-content">
+            <!-- Overview Tab -->
+            <div class="tab-content active" id="overview">
+                <h2>About the User</h2>
+                <p>Some additional description or information about the user can go here. This is an overview of their profile.</p>
+            </div>
+
+            <!-- Videos Tab -->
+            <div class="tab-content" id="videos">
+                <h2>User's Videos</h2>
+                <div class="video-grid">
+                    <!-- You can dynamically add videos here -->
+                    <div class="video-card">
+                        <video controls>
+                            <source src="video1.mp4" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                        <h4>Video Title</h4>
+                    </div>
+                    <!-- Repeat video cards as needed -->
+                </div>
+            </div>
+
+            <!-- About Tab -->
+            <div class="tab-content" id="about">
+                <h2>About the Creator</h2>
+                <p>This section can contain additional details about the user, such as links to social media profiles or other personal information.</p>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2023 Boxiee. All rights reserved.</p>
+    </footer>
+
+    <script src="profile.js"></script>
+</body>
+</html>
