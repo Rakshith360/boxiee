@@ -4,6 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>User Profile</title>
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; 
+    img-src    'self' ;
+    script-src 'self' https://cdn.jsdelivr.net; require-trusted-types-for 'script';
+   connect-src 'self'; 
+   object-src 'none'; 
+   upgrade-insecure-requests; 
+   block-all-mixed-content;">
+   <meta name="referrer" content="strict-origin-when-cross-origin">
+   <meta http-equiv="Permissions-Policy" content="geolocation=(), microphone=(), camera=()">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta http-equiv="X-XSS-Protection" content="1; mode=block">
     <link rel="stylesheet" href="profile.css">
 </head>
 <body>
@@ -11,14 +22,14 @@
     <!-- Header Section -->
     <header>
         <div class="logo">
-            <a href="#">Boxiee</a>
+          
         </div>
         <nav>
             <ul>
                 <li><a href="index.html">Home</a></li>
                 <li><a href="page.html">Upload</a></li>
-                <li><a href="#">Profile</a></li>
-                <li><a href="#">Login</a></li>
+                <li><a href="">Profile</a></li>
+                <li><a href="login.html">Login</a></li>
             </ul>
         </nav>
     </header>
@@ -27,16 +38,16 @@
     <!-- Profile Section -->
     <main class="profile-container">
         <div class="profile-banner">
-            <img src="profile-banner.jpg" alt="Profile Banner" />
+            <img src="images/Screenshot (15).png" height="500" alt="Profile Banner" />
         </div>
 
         <div class="profile-details">
             <div class="profile-picture">
-                <img src="profile-picture.jpg" alt="User Picture">
+                <img src="images/WIN_20241215_17_47_19_Pro.jpg" height="100" alt="User Picture">
             </div>
             <div class="profile-info">
-                <h1 id="username">John Doe</h1>
-                <p id="subscribers">Subscribers: <span id="subscriberCount">1,234</span></p>
+                <h1 id="username">Rakshith</h1>
+                <p id="subscribers">Subscribers: <span id="subscriberCount">300M</span></p>
                 <p id="videoCount">Videos: 567</p>
                 <p id="description">This is the user's description. Add more details here.</p>
                 <button id="followButton">Follow</button>
