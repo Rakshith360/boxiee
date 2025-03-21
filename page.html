@@ -1,0 +1,98 @@
+ 
+ <!DOCTYPE html>
+ <html lang="en">
+ <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+ 
+    <link rel="stylesheet" href="page.css">
+ 
+  
+ </head>
+ <body>
+  
+      <!-- Button to trigger the modal -->
+    <button id="uploadBtn" style="padding: 15px 30px; background-color: #007bff; color: white; font-size: 18px; border: none; border-radius: 5px;">Upload Video</button>
+
+    <!-- Upload Modal -->
+    <div class="modal" id="uploadModal">
+        <div class="modal-content">
+            <h2>Upload Your Video</h2>
+            <form id="uploadForm" enctype="multipart/form-data">
+                <label for="videoFile">Choose Video:</label>
+                <input type="file" id="videoFile" name="videoFile" accept="video/*" required>
+
+                <label for="videoTitle">Title:</label>
+                <input type="text" id="videoTitle" name="videoTitle" placeholder="Enter video title" required>
+
+                <label for="videoDescription">Description:</label>
+                <textarea id="videoDescription" name="videoDescription" placeholder="Enter video description" required></textarea>
+
+                <div class="modal-buttons">
+                    <button type="submit">Upload</button>
+                    <button type="button" id="closeModalBtn">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Home Button -->
+    <a href="index.html">
+        <button>
+            Home Page
+        </button>
+    </a>
+
+    <!-- JavaScript -->
+    <script>
+     // Get elements
+     const uploadBtn = document.getElementById('uploadBtn');
+    const uploadModal = document.getElementById('uploadModal');
+    const closeModalBtn = document.getElementById('closeModalBtn');
+    const uploadForm = document.getElementById('uploadForm');
+    const videoFileInput = document.getElementById('videoFile');
+
+    // Open the modal when the "Upload Video" button is clicked
+    uploadBtn.addEventListener('click', function(event) {
+        event.preventDefault(); // Prevent page reload
+        uploadModal.style.display = 'flex'; // Show the modal
+    });
+
+    // Close the modal when the "Cancel" button is clicked
+    closeModalBtn.addEventListener('click', function() {
+        uploadModal.style.display = 'none'; // Hide the modal
+    });
+
+    // Handle form submission
+    uploadForm.addEventListener('submit', function(event) {
+        event.preventDefault(); // Prevent default form submission
+
+        const formData = new FormData();
+        const videoFile = videoFileInput.files[0];
+        
+        if (videoFile) {
+            formData.append('video', videoFile); // Append the file to the form data
+
+            // Send the file to the server using Fetch API
+            fetch('/upload', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log('Success:', data);
+                alert('Video uploaded successfully!');
+                uploadModal.style.display = 'none'; // Close the modal after upload
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('Failed to upload video.');
+            });
+        } else {
+            alert('Please select a video to upload!');
+        }
+    });
+    </script>
+ </body>
+  </html>

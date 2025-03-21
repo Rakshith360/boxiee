@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Boxiee - Search Videos</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background: #1118ef;
+            color: white;
+            padding: 15px;
+        }
+        #search-bar {
+            width: 50%;
+            padding: 10px;
+            margin: 20px 0;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+        #video-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            padding: 20px;
+        }
+        .video-item {
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 320px;
+        }
+        .video-item video {
+            width: 100%;
+            border-radius: 5px;
+        }
+        button {
+            background-color: blue;
+            padding-left:12px;
+            padding-right:12px;
+            padding-top:12px;
+            padding-bottom:12px;
+            font-size:xx-large;
+
+        }
+        
+    </style>
+</head>
+<body>
+   
+    <header>
+        <h1>Boxiee Video Platform</h1>
+        <input type="text" id="search-bar" placeholder="Search videos...">
+    </header>
+    <br><br><br><br><br><br>
+    </b>
+    <a href="index.html">
+        <button>home page</button>
+    </a>
+    <br><br>
+
+    <main id="video-container">
+        <!-- Video results will be displayed here -->
+    </main>
+
+    <script>
+        const videos = [
+            { title: "zoro and sanji", description: "Hilarious cat compilation", url:"video/video.mp4" },
+            { title: "madara", description: "Compilation of fails", url: "video/video2.mp4" },
+            { title: "chinnametpally", description: "Exploring beautiful chinnametpally", url: "video/video5.mp4" },
+            { title: "class", description: "Learn from the bottom of your heart", url: "video/video6.mp4" },
+            { title: "Rakshith class", description: "follow my channel", url: "video/video8.mp4" },
+            { title: "brother birthday", description: "best birthday celebrations", url: "video/video9.mp4" },
+            { title: "brother birthday", description: "best birthday party", url: "video/video10.mp4" },
+            { title: "brother birthday", description: "cake cutting ", url: "video/video11.mp4" },
+            { title: "slow walk rakshith", description: "slow walking style video", url: "video/video13.mp4" },
+            { title: "grand father", description: "cmp ka model ", url: "video/video14.mp4" },
+            { title: "going merry forever", description: "go go going merry until you reach the stars", url: "video/video4.mp4" },
+            { title: "Movie Reviews", description: "Honest reviews of recent movies", url: "videos/movies.mp4" },
+            { title: "Science Experiments", description: "Fun and educational science experiments", url: "videos/science.mp4" },
+            { title: "Life Hacks", description: "Useful hacks to make life easier", url: "videos/hacks.mp4" },
+            { title: "Motivational Talks", description: "Inspiring talks to boost your day", url: "videos/motivation.mp4" },
+            { title: "Pet Training", description: "Train your pets with these tips", url: "videos/pet.mp4" },
+            { title: "History Facts", description: "Interesting historical facts", url: "videos/history.mp4" },
+            { title: "Photography Tips", description: "Improve your photography skills", url: "videos/photography.mp4" },
+            { title: "Car Reviews", description: "Reviews of the latest cars", url: "videos/cars.mp4" },
+            { title: "Cooking Desserts", description: "Sweet and delicious dessert recipes", url: "videos/desserts.mp4" },
+            { title: "Coding Tutorials", description: "Learn programming step by step", url: "videos/coding.mp4" },
+            { title: "Fitness Challenges", description: "Exciting fitness challenges", url: "videos/fitness.mp4" },
+            { title: "Wildlife Documentaries", description: "Explore nature and wildlife", url: "videos/wildlife.mp4" },
+            { title: "Street Food Tours", description: "Taste the best street food around the world", url: "videos/streetfood.mp4" }
+        ];
+
+        const searchBar = document.getElementById("search-bar");
+        const videoContainer = document.getElementById("video-container");
+
+        function displayVideos(filteredVideos) {
+            videoContainer.innerHTML = "";
+            if (filteredVideos.length === 0) {
+                videoContainer.innerHTML = "<p>No videos found</p>";
+                return;
+            }
+            filteredVideos.forEach(video => {
+                const videoElement = document.createElement("div");
+                videoElement.classList.add("video-item");
+                videoElement.innerHTML = `
+                    <h3>${video.title}</h3>
+                    <p>${video.description}</p>
+                    <video controls>
+                        <source src="${video.url}" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                `;
+                videoContainer.appendChild(videoElement);
+            });
+        }
+
+        searchBar.addEventListener("input", () => {
+            const searchText = searchBar.value.toLowerCase();
+            const filteredVideos = videos.filter(video => 
+                video.title.toLowerCase().includes(searchText) || 
+                video.description.toLowerCase().includes(searchText)
+            );
+            displayVideos(filteredVideos);
+        });
+
+        // Display all videos on page load
+        displayVideos(videos);
+    </script>
+</body>
+</html>
