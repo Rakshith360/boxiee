@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Video Upload Page</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="icon" type="image/jpg" href="images/Boxiee_logo.jpg">
+    <style>
+        /* General Styles */
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #1a1a1a;
+            margin: 0;
+            padding: 0;
+            color: #fff;
+        }
+
+        /* Header */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+            background-color: #262626;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .menu-icon {
+            font-size: 24px;
+            cursor: pointer;
+            color: #ff4d4d;
+        }
+
+        .logo {
+            height: 40px;
+            border-radius: 50%;
+        }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .upload-btn {
+            padding: 8px 16px;
+            background-color: #ff4d4d;
+            color: white;
+            border: none;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+
+        .upload-btn:hover {
+            background-color: #e60000;
+            transform: translateY(-2px);
+        }
+
+        .user-icon {
+            font-size: 32px;
+            color: #ff4d4d;
+            cursor: pointer;
+        }
+
+        /* Upload Section */
+        .upload-section {
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 30px;
+            background-color: #262626;
+            border-radius: 15px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .upload-content h2 {
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 28px;
+            color: #fff;
+        }
+
+        /* Form Styles */
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        label {
+            display: block;
+            font-weight: 500;
+            margin-bottom: 10px;
+            color: #ccc;
+        }
+
+        input[type="file"],
+        input[type="text"],
+        textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #444;
+            border-radius: 8px;
+            font-size: 16px;
+            background-color: #333;
+            color: #fff;
+            transition: border-color 0.3s ease;
+        }
+
+        input[type="file"]:focus,
+        input[type="text"]:focus,
+        textarea:focus {
+            border-color: #ff4d4d;
+            outline: none;
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        /* File Upload Styling */
+        .file-upload {
+            text-align: center;
+            padding: 40px;
+            border: 2px dashed #444;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: border-color 0.3s ease, background-color 0.3s ease;
+        }
+
+        .file-upload:hover {
+            border-color: #ff4d4d;
+            background-color: #333;
+        }
+
+        .file-upload label {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            color: #ccc;
+            cursor: pointer;
+        }
+
+        .file-upload i {
+            font-size: 48px;
+            color: #ff4d4d;
+        }
+
+        .file-upload span {
+            font-size: 16px;
+            font-weight: 500;
+        }
+
+        /* Form Buttons */
+        .form-buttons {
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+        }
+
+        .submit-btn,
+        .cancel-btn {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 20px;
+            font-size: 16px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+
+        .submit-btn {
+            background-color: #ff4d4d;
+            color: white;
+        }
+
+        .submit-btn:hover {
+            background-color: #e60000;
+            transform: translateY(-2px);
+        }
+
+        .cancel-btn {
+            background-color: #444;
+            color: white;
+        }
+
+        .cancel-btn:hover {
+            background-color: #333;
+            transform: translateY(-2px);
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 20px;
+            background-color: #262626;
+            border-top: 1px solid #444;
+            margin-top: 40px;
+        }
+
+        .footer p {
+            margin: 0;
+            font-size: 14px;
+            color: #ccc;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .upload-section {
+            animation: fadeIn 0.8s ease-out;
+        }
+    </style>
+</head>
+<body>
+    
+    <!-- Header -->
+    <header class="header">
+        <div class="header-left">
+            <i class="fas fa-bars menu-icon"></i>
+            <img src="logo/Boxiee_icon.jpg" alt="logo" class="logo">
+        </div>
+        <div class="header-right">
+            <a href="index.html">
+            <button class="upload-btn">
+                <i class="fas fa-upload"></i> Home page
+            </button>
+             
+            </a>
+        </div>
+        <div class="header-right">
+            <a href="profile_page.html">
+            <button class="upload-btn">
+                <i class="fas fa-upload"></i> Upload
+            </button>
+            <i class="fas fa-user-circle user-icon"></i>
+            </a>
+        </div>
+   
+   
+    </header>
+
+    <!-- Upload Section -->
+    <div class="upload-section">
+        <div class="upload-content">
+            <h2>Upload Your Video</h2>
+            <form id="uploadForm" enctype="multipart/form-data">
+                <div class="form-group file-upload">
+                    <label for="videoFile">
+                        <i class="fas fa-cloud-upload-alt"></i>
+                        <span>Choose Video File</span>
+                    </label>
+                    <input type="file" id="videoFile" name="videoFile" accept="video/*" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="videoTitle">Title:</label>
+                    <input type="text" id="videoTitle" name="videoTitle" placeholder="Enter video title" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="videoDescription">Description:</label>
+                    <textarea id="videoDescription" name="videoDescription" placeholder="Enter video description" required></textarea>
+                </div>
+
+                <div class="form-buttons">
+                    <button type="submit" class="submit-btn">
+                        <i class="fas fa-upload"></i> Upload
+                    </button>
+                    <button type="reset" class="cancel-btn">
+                        <i class="fas fa-times"></i> Clear
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>&copy; 2023 Boxiee. All rights reserved.</p>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        // Handle form submission
+        const uploadForm = document.getElementById('uploadForm');
+        const videoFileInput = document.getElementById('videoFile');
+        const fileUploadLabel = document.querySelector('.file-upload span');
+
+        videoFileInput.addEventListener('change', function () {
+            if (videoFileInput.files.length > 0) {
+                fileUploadLabel.textContent = videoFileInput.files[0].name;
+            } else {
+                fileUploadLabel.textContent = 'Choose Video File';
+            }
+        });
+
+        uploadForm.addEventListener('submit', function (event) {
+            event.preventDefault(); // Prevent default form submission
+
+            const formData = new FormData();
+            const videoFile = videoFileInput.files[0];
+
+            if (videoFile) {
+                formData.append('video', videoFile); // Append the file to the form data
+
+                // Simulate server upload with a delay
+                setTimeout(() => {
+                    console.log('Video uploaded successfully!');
+                    alert('Video uploaded successfully!');
+                    uploadForm.reset(); // Reset the form
+                    fileUploadLabel.textContent = 'Choose Video File'; // Reset file label
+                }, 1500); // Simulate a 1.5-second delay for upload
+            } else {
+                alert('Please select a video to upload!');
+            }
+        });
+    </script>
+</body>
+</html>

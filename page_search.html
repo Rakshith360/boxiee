@@ -1,0 +1,169 @@
+ 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Boxiee - Ultimate Premium Video Search</title>
+    <link rel="icon" type="image/jpg" href="images/Boxiee_logo.jpg">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            text-align: center;
+            background-color: #0d1117;
+            color: white;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+        }
+        header {
+            background: linear-gradient(90deg, #1118ef, #8a2be2);
+            padding: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+            animation: fadeInDown 1s ease-in-out;
+        }
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        h1 {
+            margin: 0;
+            font-size: 1.5rem;
+        }
+        #search-bar {
+            width: 60%;
+            padding: 12px;
+            margin: 20px 0;
+            border-radius: 25px;
+            border: none;
+            outline: none;
+            font-size: 1.2rem;
+            text-align: center;
+            transition: all 0.3s ease-in-out;
+        }
+        #search-bar:focus {
+            width: 70%;
+            background: #fff;
+            color: black;
+        }
+        #video-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 20px;
+            padding: 20px;
+            max-width: 1200px;
+            margin: auto;
+        }
+        .video-item {
+            background: #161b22;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s, box-shadow 0.3s;
+            animation: fadeInUp 1s ease-in-out;
+        }
+        .video-item:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 20px rgba(138, 43, 226, 0.5);
+        }
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .video-item video {
+            width: 100%;
+            border-radius: 5px;
+        }
+        button {
+            background: linear-gradient(90deg, #1e90ff, #8a2be2);
+            border: none;
+            color: white;
+            padding: 12px 20px;
+            font-size: 1.2rem;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s;
+            animation: fadeInUp 1s ease-in-out;
+        }
+        button:hover {
+            background: linear-gradient(90deg, #8a2be2, #1e90ff);
+            transform: scale(1.1);
+            box-shadow: 0 5px 15px rgba(30, 144, 255, 0.5);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Boxiee  Video Platform</h1>
+        <input type="text" id="search-bar" placeholder="Search videos...">
+    </header>
+    <br>
+    <a href="index.html">
+        <button>Home Page</button>
+    </a>
+    <br>
+    <main id="video-container"></main>
+    <script>
+        const videos = [
+        { title: "zoro and sanji", description: "Hilarious cat compilation", url:"video/video.mp4" },
+            { title: "madara", description: "Compilation of fails", url: "video/video2.mp4" },
+            { title: "chinnametpally", description: "Exploring beautiful chinnametpally", url: "video/video5.mp4" },
+            { title: "class", description: "Learn from the bottom of your heart", url: "video/video6.mp4" },
+            { title: "Rakshith class", description: "follow my channel", url: "video/video8.mp4" },
+            { title: "brother birthday", description: "best birthday celebrations", url: "video/video9.mp4" },
+            { title: "brother birthday", description: "best birthday party", url: "video/video10.mp4" },
+            { title: "brother birthday", description: "cake cutting ", url: "video/video11.mp4" },
+            { title: "slow walk rakshith", description: "slow walking style video", url: "video/video13.mp4" },
+            { title: "grand father", description: "cmp ka model ", url: "video/video14.mp4" },
+            { title: "going merry forever", description: "go go going merry until you reach the stars", url: "video/video4.mp4" },
+            { title: "Movie Reviews", description: "Honest reviews of recent movies", url: "videos/movies.mp4" },
+            { title: "Science Experiments", description: "Fun and educational science experiments", url: "videos/science.mp4" },
+            { title: "Life Hacks", description: "Useful hacks to make life easier", url: "videos/hacks.mp4" },
+            { title: "Motivational Talks", description: "Inspiring talks to boost your day", url: "videos/motivation.mp4" },
+            { title: "Pet Training", description: "Train your pets with these tips", url: "videos/pet.mp4" },
+            { title: "History Facts", description: "Interesting historical facts", url: "videos/history.mp4" },
+            { title: "Photography Tips", description: "Improve your photography skills", url: "videos/photography.mp4" },
+            { title: "Car Reviews", description: "Reviews of the latest cars", url: "videos/cars.mp4" },
+            { title: "Cooking Desserts", description: "Sweet and delicious dessert recipes", url: "videos/desserts.mp4" },
+            { title: "Coding Tutorials", description: "Learn programming step by step", url: "videos/coding.mp4" },
+            { title: "Fitness Challenges", description: "Exciting fitness challenges", url: "videos/fitness.mp4" },
+            { title: "Wildlife Documentaries", description: "Explore nature and wildlife", url: "videos/wildlife.mp4" },
+            { title: "Street Food Tours", description: "Taste the best street food around the world", url: "videos/streetfood.mp4" }
+        ];
+        const searchBar = document.getElementById("search-bar");
+        const videoContainer = document.getElementById("video-container");
+        function displayVideos(filteredVideos) {
+            videoContainer.innerHTML = "";
+            if (filteredVideos.length === 0) {
+                videoContainer.innerHTML = "<p>No videos found</p>";
+                return;
+            }
+            filteredVideos.forEach(video => {
+                const videoElement = document.createElement("div");
+                videoElement.classList.add("video-item");
+                videoElement.innerHTML = `
+                    <h3>${video.title}</h3>
+                    <p>${video.description}</p>
+                    <video controls>
+                        <source src="${video.url}" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                `;
+                videoContainer.appendChild(videoElement);
+            });
+        }
+        searchBar.addEventListener("input", () => {
+            const searchText = searchBar.value.toLowerCase();
+            const filteredVideos = videos.filter(video => 
+                video.title.toLowerCase().includes(searchText) || 
+                video.description.toLowerCase().includes(searchText)
+            );
+            displayVideos(filteredVideos);
+        });
+        displayVideos(videos);
+    </script>
+</body>
+</html>
+ 
