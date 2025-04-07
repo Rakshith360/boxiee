@@ -1,0 +1,161 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Video Page</title>
+ 
+    <link rel="stylesheet" href="page1.css">
+</head>
+<body>
+
+    <header>
+        <div class="search-container">
+            <button class="search-icon" id="searchIcon">
+                <i class="fa fa-search"></i>
+                <img src="icons/magnifying-glass.png" height="15" alt="">
+            </button>
+            <div class="search-bar" id="searchBar">
+                <input type="text" placeholder="Search..." id="searchInput">
+            </div>
+        </div>
+        <nav>
+            <div class="logo">Boxiee</div>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="page.html">Upload</a></li>
+                <li><a href="#">Profile</a></li>
+                <li><a href="#">Login</a></li>
+            </ul>
+        </nav>
+    </header>
+    <br><br><br>
+
+
+    <main>
+        <section class="video-page">
+           <!-- Video Page -->
+<div class="video-container">
+    <video id="video" controls>
+        <source id="videoSource" src="media/video1.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video> 
+    <h2 id="videoTitle">Video Title</h2>
+    <p id="videoUploader">Uploaded by User</p>
+
+    <!-- Likes and Dislikes -->
+    <p><strong>Views:</strong> <span id="views">1,000</span></p>
+    <p><strong>Likes:</strong> <span id="likes">250</span> <button class="like-btn">Like</button></p>
+    <p><strong>Dislikes:</strong> <span id="dislikes">10</span> <button class="dislike-btn">Dislike</button></p>
+
+    <!-- Subscribe button -->
+    <button class="subscribe-btn">Subscribe</button>
+
+    <!-- Comments Section -->
+    <div class="comments">
+        <h3>Comments</h3>
+        <textarea id="commentInput" placeholder="Add a comment..."></textarea>
+        <button id="postCommentBtn">Post Comment</button>
+
+        <!-- Display Comments -->
+        <div class="comment-list" id="commentList">
+            <!-- Comments will be dynamically inserted here -->
+        </div>
+    </div>
+</div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2023 Boxiee. All rights reserved.</p>
+    </footer>
+ <script>
+ // JavaScript to handle Like, Dislike, Subscribe, and Comments
+
+// Like Button
+document.querySelector('.like-btn').addEventListener('click', function() {
+    // Get current likes count and increment it
+    let likesCount = parseInt(document.getElementById('likes').innerText);
+    likesCount += 1; // Increment by 1 (or you can add any custom logic)
+    document.getElementById('likes').innerText = likesCount;
+});
+
+// Dislike Button
+document.querySelector('.dislike-btn').addEventListener('click', function() {
+    // Get current dislikes count and increment it
+    let dislikesCount = parseInt(document.getElementById('dislikes').innerText);
+    dislikesCount += 1; // Increment by 1
+    document.getElementById('dislikes').innerText = dislikesCount;
+});
+
+// Subscribe Button
+let isSubscribed = false;
+document.querySelector('.subscribe-btn').addEventListener('click', function() {
+    isSubscribed = !isSubscribed; // Toggle the subscription status
+    if (isSubscribed) {
+        document.querySelector('.subscribe-btn').innerText = 'Subscribed'; // Change button text to "Subscribed"
+    } else {
+        document.querySelector('.subscribe-btn').innerText = 'Subscribe'; // Change button text back to "Subscribe"
+    }
+});
+
+// Post Comment Button
+document.getElementById('postCommentBtn').addEventListener('click', function() {
+    // Get the comment text
+    let commentText = document.getElementById('commentInput').value;
+
+    // Check if the comment is not empty
+    if (commentText.trim() !== '') {
+        // Create a new div for the comment
+        const newComment = document.createElement('div');
+        newComment.classList.add('comment');
+        newComment.innerHTML = `<p><strong>User:</strong> ${commentText}</p>`;
+
+        // Append the new comment to the comment list
+        document.getElementById('commentList').appendChild(newComment);
+
+        // Clear the comment input field
+        document.getElementById('commentInput').value = '';
+    } else {
+        alert('Please enter a comment!');
+    }
+});
+// Like Button
+let likeClicked = false; // Variable to track if like has been clicked
+document.querySelector('.like-btn').addEventListener('click', function() {
+    if (!likeClicked) { // Only execute if not clicked before
+        let likesCount = parseInt(document.getElementById('likes').innerText);
+        likesCount += 1; // Increment by 1
+        document.getElementById('likes').innerText = likesCount;
+
+        // Disable the button after it's clicked
+        document.querySelector('.like-btn').disabled = true;
+        document.querySelector('.like-btn').innerText = "Liked"; // Change button text to "Liked"
+        
+        likeClicked = true; // Mark as clicked
+    }
+});
+
+// Dislike Button
+let dislikeClicked = false; // Variable to track if dislike has been clicked
+document.querySelector('.dislike-btn').addEventListener('click', function() {
+    if (!dislikeClicked) { // Only execute if not clicked before
+        let dislikesCount = parseInt(document.getElementById('dislikes').innerText);
+        dislikesCount += 1; // Increment by 1
+        document.getElementById('dislikes').innerText = dislikesCount;
+
+        // Disable the button after it's clicked
+        document.querySelector('.dislike-btn').disabled = true;
+        document.querySelector('.dislike-btn').innerText = "Disliked"; // Change button text to "Disliked"
+        
+        dislikeClicked = true; // Mark as clicked
+    }
+});
+
+
+
+ </script>
+</body>
+</html>
+ 
